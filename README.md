@@ -1,5 +1,10 @@
 # vue-crm
 
+## Project link
+```
+https://vue-crm-dade9.web.app/
+```
+
 ## Project setup
 ```
 npm install
