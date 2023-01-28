@@ -1,7 +1,13 @@
 .DS_Store
 node_modules
 /dist
+.firebaserc
+.browserslistrc
+.firebase
+.github
+package-lock.json
 fb.js
+firebase.json
 
 
 # local env files
