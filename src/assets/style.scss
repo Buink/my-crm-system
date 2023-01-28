@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$accent-color: black;
+$regular-text-color: black;
+$btn-bg: #27afa1;
+$btn-color: white;
+$main-bg: white;
+
+//navbar
+$navbar-background: orange;
+$navbar-background-hover: #e59200;
+$dropdown-background: white;
+$dropdown-background-hover: #dadada;
+
+//sidebar
+$sidenav-background: white;
+$sidenav-li-hover: #cecece;
+$sidenav-li-active: #e7e7e7;
+$sidenav-a-active: black;
+
+//bill page
+$bill-background: #2196F3;
+$bill-color: white;
+$currency-background: #ff7300;
+$currency-color: white;
+
+//history page
+$history-table-th: black;
+
+
+h1, h2, h3, h4, h5, h6{
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+}
+
+.custom-btn{
+  padding: 0 15px;
+  background: $btn-bg;
+  color: $btn-color;
+}
+
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  border-bottom: solid 1px rgba(51, 51, 51, .12);
+
+  h2{
+    font-size: 30px;
+    color: $accent-color;
+  }
+}
+
+h3{
+  font-size: 24px;
+}
+
+.helper-text.invalid {
+  color: #f44336;
+}
+
+.form {
+  max-width: 500px;
+}
+
+.auth-card{
+  width: 500px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.auth-submit {
+  width: 100%;
+  margin-bottom: 10px;
+}
