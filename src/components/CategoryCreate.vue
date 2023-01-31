@@ -74,26 +74,21 @@ export default {
   },
   methods: {
     async submitHandler() {
-      // инфа о форме
-      // console.log(this.v$);
       if (this.v$.$invalid) {
         this.v$.$touch();
         return;
       }
-
-      await this.$store.dispatch('createCategory', {title: this.title, limit: this.limit,})
-          .then(() => {
-            this.$message(`Категория ${this.title} создана`)
-            this.title = ''
-            this.limit = 500
-            this.v$.$reset()
-            this.$emit('updated')
-          })
-          .catch( (e) => {
-            console.log(e)
-          });
-
-
+      try {
+        await this.$store.dispatch('createCategory', {title: this.title, limit: this.limit,})
+        this.$message(`Категория ${this.title} создана`)
+        this.title = ''
+        this.limit = 500
+        this.v$.$reset()
+        this.$emit('updated')
+      } catch (e) {
+        console.log(e)
+        throw e
+      }
     },
   },
 }

@@ -134,7 +134,8 @@ export default {
         await this.$store.dispatch('register', formData)
         this.$router.push("/");
       } catch (e) {
-
+        console.log(e)
+        throw e
       }
     },
   },

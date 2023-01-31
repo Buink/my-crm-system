@@ -170,29 +170,29 @@ export default {
         return;
       }
 
-      const record = {
-        categoryId: this.category,
-        type: this.type,
-        amount: this.amount,
-        description: this.description,
-        date: new Date().toJSON()
-      }
+      try {
+        const record = {
+          categoryId: this.category,
+          type: this.type,
+          amount: this.amount,
+          description: this.description,
+          date: new Date().toJSON()
+        }
 
-      if (this.canCreateRecord){
-        await this.$store.dispatch('createRecord', record)
-            .then(() => {
-              this.$message('Запись добавлена')
-              this.type = 'outcome'
-              this.amount = null
-              this.description=  ''
-              this.v$.$reset()
-              M.updateTextFields()
-            })
-            .catch( (e) => {
-              console.log(e)
-            })
-      } else {
-        this.$error('Недостаточно средств на счете')
+        if (this.canCreateRecord){
+          await this.$store.dispatch('createRecord', record)
+          this.$message('Запись добавлена')
+          this.type = 'outcome'
+          this.amount = null
+          this.description=  ''
+          this.v$.$reset()
+          M.updateTextFields()
+        } else {
+          this.$error('Недостаточно средств на счете')
+        }
+      } catch (e) {
+        console.log(e)
+        throw e
       }
     },
   },

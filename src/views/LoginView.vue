@@ -79,8 +79,6 @@ export default {
   },
   methods: {
     async submitHandler() {
-      // инфа о форме
-      // console.log(this.v$);
       if (this.v$.$invalid) {
         this.v$.$touch();
         return;
@@ -94,6 +92,8 @@ export default {
         await this.$store.dispatch('login', formData)
         this.$router.push("/");
       } catch (e) {
+        console.log(e)
+        throw e
       }
     },
   },

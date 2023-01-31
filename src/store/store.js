@@ -20,19 +20,20 @@ export default createStore({
   },
   actions: {
     async getCurrencyData() {
-      const userCur = ['USD', 'EUR', 'CHF']
-      const userCurData = []
-      await (await fetch(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`)).json()
-        .then( (result) => {
-          for (let i = 0; i < userCur.length; i++){
-            const item = result.find(el => el['cc'] === userCur[i])
-            userCurData.push(item)
-          }
-        })
-        .catch( (e) => {
-          throw e
-        });
-      return userCurData
+      try {
+        const userCur = ['USD', 'EUR', 'CHF']
+        const userCurData = []
+        const res = await (await fetch(`https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`)).json()
+        for (let i = 0; i < userCur.length; i++){
+          const item = res.find(el => el['cc'] === userCur[i])
+          userCurData.push(item)
+        }
+        return userCurData
+      } catch (e) {
+        console.log(e)
+        throw e
+      }
+
     }
   },
   modules: {

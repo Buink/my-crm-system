@@ -144,16 +144,15 @@ export default {
         limit: this.newLimit
       }
 
-      await this.$store.dispatch('updateCategory', formData)
-          .then(() => {
-            this.$message(`Категория ${this.newTitle} изменена`)
-            this.$emit('updated')
-          })
-          .catch((e) => {
-            console.log(e)
-          })
-
-      this.v$.$reset()
+      try {
+        await this.$store.dispatch('updateCategory', formData)
+        this.$emit('updated')
+        this.$message(`Категория ${this.newTitle} изменена`)
+        this.v$.$reset()
+      } catch (e) {
+        console.log(e)
+        throw e
+      }
     },
   },
   unmounted() {

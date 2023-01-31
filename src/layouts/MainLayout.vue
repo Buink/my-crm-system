@@ -39,10 +39,12 @@ export default {
     isOpen: true,
   }),
   async mounted() {
-    await this.$store.dispatch('checkStatusAndSetData')
-        .catch( (err) => {
-          console.log(err);
-        });
+    try {
+      await this.$store.dispatch('checkStatusAndSetData')
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
   },
   computed: {
     error() {

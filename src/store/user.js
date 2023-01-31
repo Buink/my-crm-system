@@ -98,10 +98,11 @@ export default {
         },
         async logout({commit}) {
             try {
-                await signOut(auth).then(() => {console.log('sign out')})
+                await signOut(auth)
                 commit('clearInfo')
                 commit('clearUid')
             } catch (e){
+                commit('setError', e)
                 throw e
             }
         },
@@ -120,23 +121,22 @@ export default {
             }
         },
         async updateUsername({commit, getters}, username) {
-            await update(ref(db, 'users/' + getters.uid), {username: username})
-                .then(() => {
-                    commit('updateUsername', username)
-                })
-                .catch((e) => {
-                    throw e
-                })
-
+            try {
+                await update(ref(db, 'users/' + getters.uid), {username: username})
+                commit('updateUsername', username)
+            } catch (e) {
+                commit('setError', e)
+                throw e
+            }
         },
         async updateLocale({commit, getters}, locale) {
-            await update(ref(db, 'users/' + getters.uid), {locale: locale})
-                .then(() => {
-                    commit('updateLocale', locale)
-                })
-                .catch((e) => {
-                    throw e
-                })
+            try {
+                await update(ref(db, 'users/' + getters.uid), {locale: locale})
+                commit('updateLocale', locale)
+            } catch (e) {
+                commit('setError', e)
+                throw e
+            }
         },
         getUid() {
             const user = auth.currentUser;

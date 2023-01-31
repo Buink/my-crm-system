@@ -4,7 +4,7 @@
       <h2>{{ $filters.localeFilter('Menu_Categories') }}</h2>
     </div>
 
-    <div class="categories">
+    <div class="categories" :key="count">
       <div class="cat-item" v-for="(cat, i) of categories" :key="i">
         {{ $filters.uppercaseFirstLetter(cat.title) }} <i class="material-icons right" @click="deleteCategory(i)">close</i>
       </div>
@@ -34,8 +34,7 @@ import CategoryUpdate from "@/components/CategoryUpdate";
 export default {
   name: "CategoriesView",
   data: () => ({
-    count: 0,
-    categories: []
+    count: 0
   }),
   components: {
     CategoryCreate, CategoryUpdate
@@ -45,19 +44,22 @@ export default {
       this.count++
     },
     async deleteCategory(i){
-      await this.$store.dispatch('deleteCategory', i)
-          .then(() => {
-            this.count++
-          })
-          .catch((e) => {
-            throw e
-          })
-
+      try {
+        await this.$store.dispatch('deleteCategory', i)
+        this.count++
+      } catch (e) {
+        console.log(e)
+        throw e
+      }
+    }
+  },
+  computed: {
+    categories() {
+      return this.$store.getters.info.categories
     }
   },
   mounted() {
     document.title = this.$route.meta.title
-    this.categories = this.$store.getters.info.categories
   }
 }
 </script>

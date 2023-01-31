@@ -15,7 +15,6 @@ export default {
                 commit('addRecord', payload)
 
                 let newBill = getters.info.bill
-
                 if (record['type'] === 'income') {
                     newBill += +record['amount']
                 }
@@ -23,7 +22,6 @@ export default {
                     newBill = newBill - record['amount']
                 }
                 await update(ref(db, 'users/' + uid), {bill: newBill})
-
                 commit('updateBill', newBill)
             } catch (e) {
                 commit('setError', e)

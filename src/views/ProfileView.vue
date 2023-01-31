@@ -75,10 +75,9 @@ export default {
         await this.$store.dispatch('updateUsername', this.username)
         await this.$store.dispatch('updateLocale', this.isRuLocale ? 'ru-RU' : 'en-US')
       } catch (e){
-        console.error(e)
+        console.log(e)
+        throw e
       }
-
-
     },
   },
 }
